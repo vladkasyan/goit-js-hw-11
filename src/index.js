@@ -24,6 +24,8 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
+const { hits, total } = result;
+
 function onSearch(element) {
     element.preventDefault();
   
@@ -51,7 +53,7 @@ function onSearch(element) {
     refs.loadMoreBtn.classList.add('is-hidden');
   
     const result = await newsApiService.fetchGallery();
-    const { hits, total } = result;
+    
     isShown += hits.length;
   
     if (!hits.length) {
