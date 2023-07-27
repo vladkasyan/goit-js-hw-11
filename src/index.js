@@ -24,25 +24,9 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
-const { hits, total } = result;
 
-function onSearch(element) {
-    element.preventDefault();
-  
-    refs.galleryContainer.innerHTML = '';
-    newsApiService.query =
-      element.currentTarget.elements.searchQuery.value.trim();
-    newsApiService.resetPage();
-  
-    if (newsApiService.query === '') {
-      Notify.warning('Please, fill the main field');
-      return;
-    }
-  
-    isShown = 0;
-    fetchGallery();
-    onRenderGallery(hits);
-  }
+
+
 
   function onLoadMore() {
     newsApiService.incrementPage();
@@ -51,7 +35,7 @@ function onSearch(element) {
 
   async function fetchGallery() {
     refs.loadMoreBtn.classList.add('is-hidden');
-  
+    const { hits, total } = result;
     const result = await newsApiService.fetchGallery();
     
     isShown += hits.length;
@@ -77,6 +61,23 @@ function onSearch(element) {
     }
   }
 
+  function onSearch(element) {
+    element.preventDefault();
+  
+    refs.galleryContainer.innerHTML = '';
+    newsApiService.query =
+      element.currentTarget.elements.searchQuery.value.trim();
+    newsApiService.resetPage();
+  
+    if (newsApiService.query === '') {
+      Notify.warning('Please, fill the main field');
+      return;
+    }
+  
+    isShown = 0;
+    fetchGallery();
+    onRenderGallery(hits);
+  }
   
 function onRenderGallery(elements) {
     const markup = elements
