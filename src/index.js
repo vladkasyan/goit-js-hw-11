@@ -28,7 +28,7 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(element) {
     element.preventDefault();
-  
+    const { hits, total } = result;
     refs.galleryContainer.innerHTML = '';
     newsApiService.query =
       element.currentTarget.elements.searchQuery.value.trim();
