@@ -3,7 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import NewsApiService from './js/API';
 
-let lightbox = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.photo-card a', {
   captions: true,
   captionsData: 'alt',
   captionDelay: 250,
@@ -24,11 +24,9 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
-
-
 function onSearch(element) {
     element.preventDefault();
-    const { hits, total } = result;
+  
     refs.galleryContainer.innerHTML = '';
     newsApiService.query =
       element.currentTarget.elements.searchQuery.value.trim();
@@ -48,12 +46,12 @@ function onSearch(element) {
     newsApiService.incrementPage();
     fetchGallery();
   }
-
+  const { hits, total } = result;
   async function fetchGallery() {
     refs.loadMoreBtn.classList.add('is-hidden');
   
     const result = await newsApiService.fetchGallery();
-    const { hits, total } = result;
+    
     isShown += hits.length;
   
     if (!hits.length) {
