@@ -46,12 +46,12 @@ function onSearch(element) {
     newsApiService.incrementPage();
     fetchGallery();
   }
-  const { hits, total } = result;
+
   async function fetchGallery() {
     refs.loadMoreBtn.classList.add('is-hidden');
   
     const result = await newsApiService.fetchGallery();
-    
+    const { hits, total } = result;
     isShown += hits.length;
   
     if (!hits.length) {
