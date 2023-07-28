@@ -27,9 +27,10 @@ const options = {
 };
 const observer = new IntersectionObserver(onLoadMore, options);
 
+
+
 function onSearch(element) {
   element.preventDefault();
-
   refs.galleryContainer.innerHTML = '';
   newsApiService.query =
     element.currentTarget.elements.searchQuery.value.trim();
@@ -39,7 +40,7 @@ function onSearch(element) {
     Notify.warning('Please, fill the main field');
     return;
   }
-
+  element.currentTarget.elements.searchQuery.value = " "
   isShown = 0;
   fetchGallery();
   onRenderGallery(hits);
@@ -52,9 +53,9 @@ function onLoadMore() {
 
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
-
   const result = await newsApiService.fetchGallery();
   const { hits, total } = result;
+ 
   isShown += hits.length;
 
   if (!hits.length) {
