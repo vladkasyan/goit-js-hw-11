@@ -43,7 +43,7 @@ function onSearch(element) {
   element.currentTarget.elements.searchQuery.value = " "
   isShown = 0;
   fetchGallery();
-  onRenderGallery(hits);
+  
 }
 
 function onLoadMore() {
